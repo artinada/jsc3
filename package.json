@@ -1,0 +1,23 @@
+{
+  "name": "ukrlibrary",
+  "version": "1.0.0",
+  "description": "JS Crash Course Vol 3",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^3.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artinada/jsc3.git"
+  },
+  "author": "artinada",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/artinada/jsc3/issues"
+  },
+  "homepage": "https://github.com/artinada/jsc3#readme"
+}

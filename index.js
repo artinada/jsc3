@@ -1,72 +1,39 @@
-/* there is a library with many books. We can add a new book to the library.
-Customer can:
- take a book - done
- prolong a booking - to do 
- return a book - to do
-  */
+const Customer = require('./models/customer');
+const Book = require('./models/book');
+const Library = require('./models/library');
+const Database = require('./models/database')
 
-class Customer {
-  constructor(name, abonumber) {
-    this.name = name;
-    this.abonumber = abonumber;
-    this.books = [];
-  }
-
-  takeBook(book) {
-    book.assignTo(this);
-    this.books.push(book);
-    console.log(this.name + " borrowed the book ", book.name);
-  }
-
-  returnBook(book) {
-    this.books.slice(book);
-    console.log("From your order " + this.books + "is deleted " + book);
-  }
-}
-
-class Book {
-  constructor(name) {
-    this.name = name;
-  }
-
-  assignTo(customer) {
-    this.owner = customer;
-  }
-}
-
-class Library {
-  constructor(name, address) {
-    this.name = name;
-    this.address = address;
-    this.books = [];
-    this.customers = [];
-  }
-
-  addBook(book) {
-    this.books.push(book);
-  }
-
-  listBooks() {
-    this.books.forEach(book => console.log(book));
-  }
-}
 
 max = new Customer("Max", 77777);
 eva = new Customer("Eva", 65437);
-console.log(max, eva);
 
-book1 = new Book("BigBook");
-book2 = new Book("RedBook");
-book3 = new Book("FirstBook");
+book1 = new Book("BigBook", 1);
+book2 = new Book("RedBook", 2);
+book3 = new Book("Первая книга", 3);
 
-library1 = new Library("City Library", "Berlin 10000");
+
+library1 = new Library("Berlin City Library", "Breite Str. 30-36, 10178 Berlin");
+library2 = new Library("Philological Library", "Habelschwerdter Allee 45, 14195 Berlin")
+
 library1.addBook(book1);
 library1.addBook(book2);
 library1.addBook(book3);
 
 library1.listBooks();
+//console.log(library1.listBooks)
+max.assignToLibrary(library1);
 
-eva.takeBook(book1);
-eva.takeBook(book2);
+eva.takeBook(book1, "13.11.2018");
+eva.takeBook(book2, "13.11.2018");
+max.takeBook(book1, "13.11.2018");
 
-console.log(book1.owner);
+//console.log(book1.owner);
+
+Database.save('customer.json', max)
+Database.save('book.json', book1)
+Database.save('library.json', library1)
+loadedFile = Database.load('library.json')
+console.log(loadedFile)
+
+
+

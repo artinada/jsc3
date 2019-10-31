@@ -1,0 +1,1 @@
+{"name":"Berlin City Library","address":"Breite Str. 30-36, 10178 Berlin","allBooks":[{"name":"BigBook","bookId":1,"owner":"Max"},{"name":"RedBook","bookId":2,"owner":"Eva"},{"name":"Первая книга","bookId":3}],"customers":[{"name":"Max","abonumber":77777,"basket":[{"name":"BigBook","bookId":1,"owner":"Max"},"13.11.2018"]}]}

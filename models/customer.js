@@ -1,25 +1,28 @@
+const Order = require('./order');
+
 module.exports = class Customer {
-    constructor(name, abonumber, library) {
+    constructor(name, abonumber) {
       this.name = name;
       this.abonumber = abonumber;
-      this.basket = [];
+    }
+
+    static create(jsonObj){
+      const cust =  new Customer(jsonObj.name, jsonObj.abonumber)
+      cust.id = jsonObj.id
+      return cust;
     }
   
-    takeBook(book, day) {
-      book.assignTo(this);
-      this.basket.push(book, day);
-      
-      console.log(this.name + " borrowed the book ", book.name, "on ", day);
+    takeBook(books, day) {
+      const order = new Order(this, books, day);
+      books.forEach(book => {book.library.allOrders.push(order)});
+      console.log(this.name + " borrowed the book ", books, "on ", day);
+
+ //     order.booksArray.push({book, day});
     }
 
     assignToLibrary(library) {
-      library.customers.push(this);
+      library.allCustomers.push(this);
       console.log(this.name + " is member of ", library.name);
     }
-  
-    // returnBook(book) {
-    //   this.books.slice(book);
-    //   console.log("From your order " + this.books + "is deleted " + book);
-    // }
   }
   

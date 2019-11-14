@@ -1,11 +1,17 @@
 module.exports = class Book {
-    constructor(name, bookId) {
+    constructor(name) {
       this.name = name;
-      this.bookId = bookId;
+      this.library;
     }
   
-    assignTo(customer, day) {
-      this.owner = customer.name;
-      this.day = day;
+    assignToLibrary(library){
+      this.library = library;
+      library.allBooks.push(this);
     }
-  }
+
+    static create (jsonObj){
+      const book =  new Book(jsonObj.name);
+      book.id = jsonObj.id; 
+      return book;
+    }
+}

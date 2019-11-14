@@ -56,9 +56,9 @@ module.exports = class Service {
     return allItems.find(p => p.id == itemId)
   }
 
-  async saveAll(people) {
+  async saveAll(item) {
     return new Promise((resolve, reject) => {
-      fs.writeFile(this.dbPath, Flatted.stringify(people), (err, file) => {
+      fs.writeFile(this.dbPath, Flatted.stringify(item), (err, file) => {
         if (err) return reject(err)
 
         resolve()

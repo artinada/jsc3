@@ -1,45 +1,54 @@
 const Customer = require('./models/customer');
 const Book = require('./models/book');
+const Order = require('./models/order');
 const Library = require('./models/library');
 const Database = require('./models/database')
+const BookService = require('./services/book-service')
+const CustomerService = require('./services/customer-service')
+const LibraryService = require('./services/library-service')
+const OrderService = require('./services/order-service')
 
+console.log('Hello World!')
 
-// max = new Customer("Max", 77777);
-// eva = new Customer("Eva", 65437);
+async function main() {
+//Objects creating    
+    const max = new Customer("Max", 77777);
+    const eva = new Customer("Eva", 65437);
 
-// book1 = new Book("BigBook", 1);
-// book2 = new Book("RedBook", 2);
-// book3 = new Book("Первая книга", 3);
+    const book1 = new Book("BigBook");
+    const book2 = new Book("RedBook");
+    const book3 = new Book("Первая книга");
+    const book4 = new Book("RedBook");
 
-// library1 = new Library("Berlin City Library", "Breite Str. 30-36, 10178 Berlin");
-// library2 = new Library("Philological Library", "Habelschwerdter Allee 45, 14195 Berlin")
+    const library1 = new Library("Berlin City Library", "Breite Str. 30-36, 10178 Berlin");
+    const library2 = new Library("Philological Library", "Habelschwerdter Allee 45, 14195 Berlin")
+    
+    book1.assignToLibrary(library1)
+    book2.assignToLibrary(library1)
+    book3.assignToLibrary(library1)
+    book4.assignToLibrary(library2)
 
-// library1.addBook(book1);
-// library1.addBook(book2);
-// library1.addBook(book3);
+    max.assignToLibrary(library1);  
 
-// console.log(library1.listBooks)
-// max.assignToLibrary(library1);
+    eva.takeBook([book3], "13.11.2018");
+    eva.takeBook([book2], "15.11.2018");
+    max.takeBook([book1], "13.10.2018");
 
-//  eva.takeBook(book3, "13.11.2018");
-//  eva.takeBook(book2, "13.11.2018");
-//  max.takeBook(book1, "13.11.2018");
+    library1.listOrders();
 
-//console.log(book1.owner);
+//adding Objects to DB    
+    await CustomerService.add(max)
+    await CustomerService.add(eva)
+    const showPeople = await CustomerService.findAll()
 
-// Database.save('customer.json', eva);
-// Database.save('book.json', book1);
-// Database.save('library.json', library1);
+    await BookService.add(book1)
+    await BookService.add(book2)
+    await BookService.add(book3)
+    const showBook = await BookService.findAll(); 
 
-const loadedFile = Database.load('library.json');
+    await LibraryService.add(library1);
+    const showLibraries = await LibraryService.findAll()
+    showLibraries[0].listOrders()
+}
 
-//const library1 = new Library(loadedFile.name, loadedFile.address, loadedFile.allBooks, loadedFile.allCustomers)
-const library2 = Library.create(loadedFile)
-
-const library3 = new Library("New Library", "Street 1")
-console.log(library.allBooks[0].assignToLibrary(library3));
-
-//library2.listBooks
-//library1.allBooks.forEach(book => console.log(book.name))
-//library2.listCustomers
-
+main();

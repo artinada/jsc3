@@ -4,7 +4,9 @@
   "description": "JS Crash Course Vol 3",
   "main": "index.js",
   "dependencies": {
-    "async": "^3.1.0"
+    "async": "^3.1.0",
+    "express": "^4.17.1",
+    "flatted": "^2.0.1"
   },
   "devDependencies": {},
   "scripts": {
@@ -15,7 +17,7 @@
     "url": "git+https://github.com/artinada/jsc3.git"
   },
   "author": "artinada",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/artinada/jsc3/issues"
   },

@@ -4,7 +4,7 @@
   "description": "JS Crash Course Vol 3",
   "main": "index.js",
   "dependencies": {
-    "async": "^3.1.0",
+    "async": "^3.2.2",
     "express": "^4.17.1",
     "flatted": "^2.0.1"
   },
